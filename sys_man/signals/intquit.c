@@ -21,6 +21,12 @@
 #include <signal.h>
 #include "tlpi_hdr.h"
 
+/**
+ * @brief  sigHandler(int sig)
+ * @note   
+ * @param  sig: 
+ * @retval None
+ */
 static void
 sigHandler(int sig)
 {
