@@ -1,0 +1,20 @@
+--- arch/arm/mach-omap1/serial.c	2007-08-31 14:21:01.000000000 +0800
++++ arch/arm/mach-omap1/serial.c	2011-01-27 22:19:57.005540926 +0800
+@@ -15,6 +15,7 @@
+ #include <linux/delay.h>
+ #include <linux/serial.h>
+ #include <linux/tty.h>
++#include <linux/kgdb.h>
+ #include <linux/serial_8250.h>
+ #include <linux/serial_reg.h>
+ #include <linux/clk.h>
+@@ -199,6 +200,9 @@
+ 			break;
+ 		}
+ 		omap_serial_reset(&serial_platform_data[i]);
++#ifdef CONFIG_KGDB_8250
++		kgdb8250_add_platform_port(i, &serial_platform_data[i]);
++#endif
+ 	}
+ }
+ 

@@ -1,0 +1,12 @@
+--- arch/arm/plat-s3c24xx/cpu.c	2007-08-31 14:21:01.000000000 +0800
++++ arch/arm/plat-s3c24xx/cpu.c	2011-01-27 22:19:57.081435330 +0800
+@@ -162,7 +162,8 @@
+ 	IODESC_ENT(GPIO),
+ 	IODESC_ENT(IRQ),
+ 	IODESC_ENT(MEMCTRL),
+-	IODESC_ENT(UART)
++	IODESC_ENT(UART),
++	IODESC_ENT(IIS)    // for IIS, thiswa.diy@163.com, www.100ask.net
+ };
+ 
+ 

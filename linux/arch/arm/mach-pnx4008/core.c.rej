@@ -1,0 +1,13 @@
+--- arch/arm/mach-pnx4008/core.c	2007-08-31 14:21:01.000000000 +0800
++++ arch/arm/mach-pnx4008/core.c	2011-01-27 22:19:57.017273729 +0800
+@@ -224,6 +224,10 @@
+ 	spi_register_board_info(spi_board_info, ARRAY_SIZE(spi_board_info));
+ 	/* Switch on the UART clocks */
+ 	pnx4008_uart_init();
++#ifdef CONFIG_KGDB_8250
++	kgdb8250_add_platform_port(0, &platform_serial_ports[0]);
++	kgdb8250_add_platform_port(1, &platform_serial_ports[1]);
++#endif
+ }
+ 
+ static struct map_desc pnx4008_io_desc[] __initdata = {

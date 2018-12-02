@@ -1,0 +1,13 @@
+--- arch/arm/mach-ixp4xx/coyote-setup.c	2007-08-31 14:21:01.000000000 +0800
++++ arch/arm/mach-ixp4xx/coyote-setup.c	2011-01-27 22:19:56.989275190 +0800
+@@ -96,6 +96,10 @@
+ 	}
+ 
+ 	platform_add_devices(coyote_devices, ARRAY_SIZE(coyote_devices));
++
++#ifdef CONFIG_KGDB_8250
++	kgdb8250_add_platform_port(0, &coyote_uart_data);
++#endif
+ }
+ 
+ #ifdef CONFIG_ARCH_ADI_COYOTE

@@ -59,7 +59,13 @@ main(int argc, char *argv[])
        signal handler, then the static storage returned by crypt()
        will be overwritten by the results of encrypting argv[2], and
        strcmp() will detect a mismatch with the value in 'cr1'. */
-
+    /**
+     * @brief  正常情况下，处理同一个字符得出的结果肯定是相同的，但是当捕捉到Crt+C之后就会出现不一样的结果，因为信号处理函数中断了加密函数的执行
+     * @note   
+     * @param  1: 
+     * @param  callNum++: 
+     * @retval 
+     */
     for (callNum = 1, mismatch = 0; ; callNum++) {
         if (strcmp(crypt(argv[1], "xx"), cr1) != 0) {
             mismatch++;

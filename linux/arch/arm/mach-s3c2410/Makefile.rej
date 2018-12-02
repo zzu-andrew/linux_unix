@@ -1,0 +1,7 @@
+--- arch/arm/mach-s3c2410/Makefile	2007-08-31 14:21:01.000000000 +0800
++++ arch/arm/mach-s3c2410/Makefile	2011-01-27 22:19:57.037497709 +0800
+@@ -29,3 +29,4 @@
+ obj-$(CONFIG_BAST_PC104_IRQ)	+= bast-irq.o
+ obj-$(CONFIG_MACH_VR1000)	+= mach-vr1000.o usb-simtec.o
+ obj-$(CONFIG_MACH_QT2410)	+= mach-qt2410.o
++obj-$(CONFIG_KGDB_S3C24XX_SERIAL) += kgdb-serial.o

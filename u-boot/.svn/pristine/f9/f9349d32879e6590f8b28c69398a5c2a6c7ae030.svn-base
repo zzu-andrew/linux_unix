@@ -1,0 +1,122 @@
+#!/bin/sh -e
+
+# Script to create header files and links to configure
+# U-Boot for a specific board.
+#
+# Parameters:  Target    Architecture  CPU      Board      [VENDOR] [SOC]
+#  ./mkconfig  smdk2410  arm           arm920t  smdk2410   NULL      s3c2410
+# (C) 2002-2006 DENX Software Engineering, Wolfgang Denk <wd@denx.de>
+#
+
+# mkconfig 100ask24x0 arm arm920t 100ask24x0 NULL s3c24x0
+# $0=mkconfig   $1=100ask24x0   $2=arm   $3=arm920t  $4=100ask24x0 $5=NULL  $6=s3c24x0
+
+APPEND=no	# Default: Create new config file
+BOARD_NAME=""	# Name to print in make output
+
+# 如果BOARD_NAME不为空，直接向下执行，这里的BOARD_NAME为空，执行BOARD_NAME="$1"
+# 执行之后BOARD_NAME=100ask24x0
+
+[ "${BOARD_NAME}" ] || BOARD_NAME="$1"
+
+# 若果参数小于4就退出，退出状态码是1，若果参数大于6也退出，$#代表参数的个数
+[ $# -lt 4 ] && exit 1
+[ $# -gt 6 ] && exit 1
+
+
+# make 100ask24x0 之后会输出这句提示语
+echo "Configuring for ${BOARD_NAME} board..."
+
+
+
+
+
+#
+# Create link to architecture specific headers
+#
+# 因为没有定义   O  因此 "$SRCTREE" == "$OBJTREE" 
+# 执行else分支
+# OBJTREE		:= $(if $(BUILD_DIR),$(BUILD_DIR),$(CURDIR))
+# SRCTREE		:= $(CURDIR)
+
+if [ "$SRCTREE" != "$OBJTREE" ] ; then
+	echo "obj obj obj obj obj"
+	mkdir -p ${OBJTREE}/include
+	mkdir -p ${OBJTREE}/include2
+	cd ${OBJTREE}/include2
+	rm -f asm
+	ln -s ${SRCTREE}/include/asm-$2 asm
+	LNPREFIX="../../include2/asm/"
+	cd ../include
+	rm -rf asm-$2
+	rm -f asm
+	mkdir asm-$2
+	ln -s asm-$2 asm
+else
+# $2=arm
+#进入include 目录  清除  asm 文件并为  asm-arm 生成软连接文件  asm  
+#进入include 目录会看到   asm -> asm-arm的连接文件
+#代码中有好多的  #include<asm/....h>等文件 因此讲   asm-> asm-arm就可以直接使用asm-arm中的头文件
+	cd ./include
+	rm -f asm
+	ln -s asm-$2 asm
+fi
+
+
+# rm -f asm-arm/arch
+
+rm -f asm-$2/arch   
+
+
+# $0=mkconfig   $1=100ask24x0   $2=arm   $3=arm920t  $4=100ask24x0 $5=NULL  $6=s3c24x0
+# 若果第六个参数为空，或者第六个参数为NULL就执行  then后面的语句
+if [ -z "$6" -o "$6" = "NULL" ] ; then
+	ln -s ${LNPREFIX}arch-$3 asm-$2/arch
+else
+# 执行该句
+# LNPREFIX 没有定义就直接忽略相当于   NULL  
+	echo $PWD    # 输出/work/svn_linux/u-boot/include
+	# 这条语句是在include下建立一个asm-$2/arch的link，也即asm-arm/arch，指向${LNPREFIX}arch-$6，即arch-s3c24x0
+	ln -s ${LNPREFIX}arch-$6 asm-$2/arch    # ln -s arch-s3c24x0 asm-arm/arch
+	#echo ${LNPREFIX}   #该句只打印了一行空行，说明 LNPREFIX是没有定义
+fi
+
+
+# $0=mkconfig   $1=100ask24x0   $2=arm   $3=arm920t  $4=100ask24x0 $5=NULL  $6=s3c24x0
+# 执行之后    
+# lrwxrwxrwx 1 andrew andrew 9 9月  20 22:31 proc -> proc-armv
+if [ "$2" = "arm" ] ; then
+	rm -f asm-$2/proc
+	ln -s ${LNPREFIX}proc-armv asm-$2/proc
+fi
+
+#
+# Create include file for Make
+#
+echo $PWD   #在 include下 新建一个  config.mk文件          >表示是新建文件
+echo "ARCH   = $2" >  config.mk
+echo "CPU    = $3" >> config.mk
+echo "BOARD  = $4" >> config.mk
+
+[ "$5" ] && [ "$5" != "NULL" ] && echo "VENDOR = $5" >> config.mk
+
+[ "$6" ] && [ "$6" != "NULL" ] && echo "SOC    = $6" >> config.mk
+
+#
+# Create board specific header file
+#
+#创建一个单板相关的头文件
+
+
+#  APPEND=no	# Default: Create new config file 默认创建新文件
+if [ "$APPEND" = "yes" ]	# Append to existing config file
+then
+	echo >> config.h
+else
+# 创建新文件  config.h
+	> config.h		# Create new config file
+fi
+echo "/* Automatically generated - do not edit */" >>config.h
+echo "#include <configs/$1.h>" >>config.h
+
+exit 0

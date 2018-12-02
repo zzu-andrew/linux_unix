@@ -1,0 +1,10 @@
+--- arch/arm/kernel/Makefile	2007-08-31 14:21:01.000000000 +0800
++++ arch/arm/kernel/Makefile	2011-01-27 22:19:56.969263922 +0800
+@@ -20,6 +20,7 @@
+ obj-$(CONFIG_SMP)		+= smp.o
+ obj-$(CONFIG_KEXEC)		+= machine_kexec.o relocate_kernel.o
+ obj-$(CONFIG_OABI_COMPAT)	+= sys_oabi-compat.o
++obj-$(CONFIG_KGDB)		+= kgdb.o kgdb-jmp.o
+ 
+ obj-$(CONFIG_CRUNCH)		+= crunch.o crunch-bits.o
+ AFLAGS_crunch-bits.o		:= -Wa,-mcpu=ep9312
