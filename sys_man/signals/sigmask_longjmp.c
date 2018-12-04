@@ -18,6 +18,11 @@
    By default, this program uses setjmp() + longjmp(). Compile with
    -DUSE_SIGSETJMP to use sigsetjmp() + siglongjmp().
 */
+/**
+ * @brief  
+ * @note   
+ * @retval None
+ */
 #define _GNU_SOURCE     /* Get strsignal() declaration from <string.h> */
 #include <string.h>
 #include <setjmp.h>
