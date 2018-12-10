@@ -1,4 +1,4 @@
-Gidday!
+ # Gidday!
 
 This is the code for the book "The Linux Programming Interface"
 and this is a note from me, the author, Michael Kerrisk.
@@ -9,7 +9,7 @@ For notes on changes that have been made to the code since it was
 published in the book, see the file CHANGES.
 
 
-Source code licensing
+ # Source code licensing
 =====================
 
 All complete programs provided in this distribution are covered by
