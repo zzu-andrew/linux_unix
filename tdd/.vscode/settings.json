@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "leddriver.h": "c",
+        "runtimeerrorstub.h": "c",
+        "memory.h": "c"
+    }
+}

@@ -25,12 +25,54 @@
 /*- ------------------------------------------------------------------ -*/
 
 
+/**
+ * @brief  下面的函数  每个TEST  对应一个  RUN_TEST_CASE 也就是这些函数在主函数中调用的相应的  TEST函数进行的测试
+ * @note    
+ * @retval 
+ */
+/**
+ * @brief  通过宏定义实现的  TEST函数将在相应的  RUN_TEST_CASE中进行调用
+ */
+
+#if 0
+
+TEST_GROUP_RUNNER(LedDriver)
+{
+    RUN_TEST_CASE(LedDriver, LedsOffAfterCreate);
+    RUN_TEST_CASE(LedDriver, TurnOnLedOne);
+    RUN_TEST_CASE(LedDriver, TurnOffLedOne);
+    RUN_TEST_CASE(LedDriver, TurnOnMultipleLeds);
+    RUN_TEST_CASE(LedDriver, TurnOffMultipleLeds);
+    RUN_TEST_CASE(LedDriver, TurnOffAnyLed);
+    RUN_TEST_CASE(LedDriver, LedMemoryIsNotReadable);
+    RUN_TEST_CASE(LedDriver, UpperAndLowerBounds);
+    RUN_TEST_CASE(LedDriver, OutOfBoundsTurnOnDoesNoHarm);
+    RUN_TEST_CASE(LedDriver, OutOfBoundsTurnOffDoesNoHarm);
+    RUN_TEST_CASE(LedDriver, OutOfBoundsToDo);
+    RUN_TEST_CASE(LedDriver, OutOfBoundsProducesRuntimeError);
+    RUN_TEST_CASE(LedDriver, IsOn);
+    RUN_TEST_CASE(LedDriver, IsOff);
+    RUN_TEST_CASE(LedDriver, OutOfBoundsLedsAreAlwaysOff);
+    RUN_TEST_CASE(LedDriver, AllOn);
+    RUN_TEST_CASE(LedDriver, AllOff);
+}
+
+
+#endif
+
 #include "unity_fixture.h"
 #include "LedDriver.h"
 #include "RuntimeErrorStub.h"
 
 
-TEST_GROUP(LedDriver);
+void get_led_status(uint16_t *addr)
+{
+    *addr = 0;
+}
+
+
+
+TEST_GROUP(LedDriver);  //> 对应函数    RUN_TEST_GROUP(LedDriver);
 static uint16_t virtualLeds;
 TEST_SETUP(LedDriver)
 {
@@ -44,12 +86,12 @@ TEST_TEAR_DOWN(LedDriver)
 TEST(LedDriver, LedsOffAfterCreate)
 {
     uint16_t virtualLeds = 0xffff;
-    LedDriver_Create(&virtualLeds);
+    get_led_status(&virtualLeds);
     TEST_ASSERT_EQUAL_HEX16(0, virtualLeds);
 }
-TEST(LedDriver, TurnOnLedOne)
+TEST(LedDriver, TurnOnLedOne)   //>  对应函数  RUN_TEST_CASE(LedDriver, TurnOnLedOne); 
 {
-    LedDriver_TurnOn(1);
+    LedDriver_TurnOn(1); 
     TEST_ASSERT_EQUAL_HEX16(1, virtualLeds);
 }
 TEST(LedDriver, TurnOffLedOne)
@@ -167,7 +209,7 @@ TEST(LedDriver, AllOff)
  * Intermediate examples below this comment
  */
 
-#if 0 
+#if 0
 TEST(LedDriver, TurnOnLedOne)
 {
     uint16_t virtualLeds;

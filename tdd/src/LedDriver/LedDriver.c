@@ -29,7 +29,8 @@
 #include "RuntimeError.h"
 
 
-enum {ALL_LEDS_OFF = 0, ALL_LEDS_ON = ~0};
+
+enum {ALL_LEDS_OFF = 0, ALL_LEDS_ON = ~ALL_LEDS_OFF};
 
 static uint16_t * ledsAddress;
 static uint16_t ledsImage;
