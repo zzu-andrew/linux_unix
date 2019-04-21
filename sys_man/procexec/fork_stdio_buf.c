@@ -14,6 +14,8 @@
 
    Experiment with fork() and stdio buffering.
 */
+//子进程结束的时候会发出SIGCHLD信号
+
 #include "tlpi_hdr.h"
 
 int

@@ -27,6 +27,12 @@
 #include "curr_time.h"              /* Declaration of currTime() */
 #include "tlpi_hdr.h"
 
+//如果调用进程无之前未被等待的子进程终止，调用将一直阻塞，直至某个子进程终止
+//在wait调用但是没有子进程时，会返回-1状态码
+//status状态码只使用7位，是因为有一位用来显示是否有核心转存储生成
+
+
+
 int
 main(int argc, char *argv[])
 {
@@ -57,6 +63,7 @@ main(int argc, char *argv[])
     }
 
     numDead = 0;
+    //这里循环等待所有的子进程退出，并返回子进程的状态码
     for (;;) {                      /* Parent waits for each child to exit */
         childPid = wait(NULL);
         if (childPid == -1) {

@@ -14,6 +14,10 @@
 
    Demonstrate the use of execve() to execute a program.
 */
+
+//execve 系统调用，可以将新程序加载到某一进程的内存空间，这一操作过程中将丢弃旧有程序，而进程的栈数据以及堆段数=会
+//被新程序相应的部件所替换
+
 #include "tlpi_hdr.h"
 
 int

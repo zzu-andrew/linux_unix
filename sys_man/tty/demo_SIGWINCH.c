@@ -29,6 +29,7 @@ sigwinchHandler(int sig)
 int
 main(int argc, char *argv[])
 {
+
     struct winsize ws;
     struct sigaction sa;
 

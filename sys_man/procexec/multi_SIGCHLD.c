@@ -25,6 +25,7 @@
 static volatile int numLiveChildren = 0;
                 /* Number of children started but not yet waited on */
 
+//< linux中显式的忽略SIGCHILD为SIG_IGN系統從而會将其后产生的子进程立即删除，毋庸转为僵尸进程
 static void
 sigchldHandler(int sig)
 {

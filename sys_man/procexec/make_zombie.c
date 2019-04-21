@@ -44,6 +44,7 @@ main(int argc, char *argv[])
     default:    /* Parent */
         sleep(3);               /* Give child a chance to start and exit */
         snprintf(cmd, CMD_SIZE, "ps | grep %s", basename(argv[0]));
+        printf("%s\n", cmd);
         system(cmd);            /* View zombie child */
 
         /* Now send the "sure kill" signal to the zombie */
