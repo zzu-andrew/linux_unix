@@ -226,7 +226,7 @@ MemoryLeakDetectorNode* MemoryLeakDetectorTable::getFirstLeak(MemLeakPeriod peri
 
 MemoryLeakDetectorNode* MemoryLeakDetectorTable::getNextLeak(MemoryLeakDetectorNode* leak, MemLeakPeriod period)
 {
-	int i = hash(leak->memory_);
+	unsigned long  i = hash(leak->memory_);
 	MemoryLeakDetectorNode* node = table_[i].getNextLeak(leak, period);
 	if (node) return node;
 

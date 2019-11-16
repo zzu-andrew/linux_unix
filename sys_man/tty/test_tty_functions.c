@@ -94,13 +94,12 @@ tstpHandler(int sig)
     errno = savedErrno;
 }
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     char ch;
     struct sigaction sa, prev;
     ssize_t n;
-
+    //<
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_RESTART;
 
@@ -153,7 +152,7 @@ main(int argc, char *argv[])
 
         if (n == 0)                     /* Can occur after terminal disconnect */
             break;
-
+        //< 是大写或者小写字符
         if (isalpha((unsigned char) ch))        /* Letters --> lowercase */
             putchar(tolower((unsigned char) ch));
         else if (ch == '\n' || ch == '\r')

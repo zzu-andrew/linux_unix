@@ -14,16 +14,16 @@
 
    Implement a function that can be used by a daemon (or indeed any program)
    to ensure that only one instance of the program is running.
-*/
+*/              
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "region_locking.h"             /* For lockRegion() */
 #include "create_pid_file.h"            /* Declares createPidFile() and
-                                           defines CPF_CLOEXEC */
+                                                  defines CPF_CLOEXEC */
 #include "tlpi_hdr.h"
 
 #define BUF_SIZE 100            /* Large enough to hold maximum PID as string */
-
+    
 /* Open/create the file named in 'pidFile', lock it, optionally set the
    close-on-exec flag for the file descriptor, write our PID into the file,
    and (in case the caller is interested) return the file descriptor
@@ -32,7 +32,7 @@
    name of the calling program (i.e., argv[0] or similar), and is used only for
    diagnostic messages. If we can't open 'pidFile', or we encounter some other
    error, then we print an appropriate diagnostic and terminate. */
-
+                                                        
 int
 createPidFile(const char *progName, const char *pidFile, int flags)
 {

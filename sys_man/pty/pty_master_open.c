@@ -49,6 +49,7 @@ posix_openpt(int flags)
    slave is returned in 'slaveName'. 'snLen' should be set to
    indicate the size of the buffer pointed to by 'slaveName'. */
 
+//< 打开伪终端主设备
 int
 ptyMasterOpen(char *slaveName, size_t snLen)
 {

@@ -40,13 +40,14 @@ main(int argc, char *argv[])
     if (argc < 2 || strcmp(argv[1], "--help") == 0)
         usageErr("%s file...\n", argv[0]);
 
+    //< 创建一个epoll实例
     epfd = epoll_create(argc - 1);
     if (epfd == -1)
         errExit("epoll_create");
 
     /* Open each file on command line, and add it to the "interest
        list" for the epoll instance */
-
+    //  打开命令行上指定的所有的实例，用于epoll监控
     for (j = 1; j < argc; j++) {
         fd = open(argv[j], O_RDONLY);
         if (fd == -1)
@@ -55,6 +56,7 @@ main(int argc, char *argv[])
 
         ev.events = EPOLLIN;            /* Only interested in input events */
         ev.data.fd = fd;
+        //< 将打开的文件，添加到epoll感兴趣的列表中去
         if (epoll_ctl(epfd, EPOLL_CTL_ADD, fd, &ev) == -1)
             errExit("epoll_ctl");
     }

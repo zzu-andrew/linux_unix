@@ -23,7 +23,9 @@
 int
 main(int argc, char *argv[])
 {
+	//和char *argv[]，主函数中传入的参数是一致的，参数传入采用指针数组的方式传入
     char *argVec[10];           /* Larger than required */
+    //< 用指针数组的方式传入参数，在PPPoE中的拨号参数也是这样传入的
     char *envVec[] = { "GREET=salut", "BYE=adieu", NULL };
 
     if (argc != 2 || strcmp(argv[1], "--help") == 0)

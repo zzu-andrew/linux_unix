@@ -68,7 +68,7 @@ main(int argc, char *argv[])
 {
     int lfd, cfd;               /* Listening and connected sockets */
     struct sigaction sa;
-
+    //< 将进程变为守护进程
     if (becomeDaemon(0) == -1)
         errExit("becomeDaemon");
 
@@ -77,11 +77,12 @@ main(int argc, char *argv[])
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_RESTART;
     sa.sa_handler = grimReaper;
+    //< 注册 SIGCHLD信号量， reap获取子进程
     if (sigaction(SIGCHLD, &sa, NULL) == -1) {
         syslog(LOG_ERR, "Error from sigaction(): %s", strerror(errno));
         exit(EXIT_FAILURE);
     }
-
+    //< 监听 echo 
     lfd = inetListen(SERVICE, 10, NULL);
     if (lfd == -1) {
         syslog(LOG_ERR, "Could not create server socket (%s)", strerror(errno));
@@ -89,6 +90,7 @@ main(int argc, char *argv[])
     }
 
     for (;;) {
+        //< 成功返回新的套接字描述符
         cfd = accept(lfd, NULL, NULL);  /* Wait for connection */
         if (cfd == -1) {
             syslog(LOG_ERR, "Failure in accept(): %s", strerror(errno));

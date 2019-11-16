@@ -1,0 +1,15 @@
+  0.00%   objs/src/devices/*.
+  0.00%   objs/src/devices/AcmeWirelessLightDriver.
+  0.00%   objs/src/devices/LightDriver.
+  0.00%   objs/src/devices/MemMappedLightDriver.
+  0.00%   objs/src/devices/X10LightDriver.
+  0.00%   objs/src/HomeAutomation/*.
+  0.00%   objs/src/HomeAutomation/LightController.
+  0.00%   objs/src/HomeAutomation/LightScheduler.
+  0.00%   objs/src/HomeAutomation/RandomMinute.
+  0.00%   objs/src/ProductionCodeLib.
+  0.00%   objs/src/util/*.
+  0.00%   objs/src/util/common.
+  0.00%   objs/src/util/Time.
+  0.00%   objs/src/util/TimeService.
+No executable lines   No executable lines

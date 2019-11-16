@@ -40,20 +40,22 @@
 
 #define MAX_SNAME 1000                  /* Maximum size for pty slave name */
 
-pid_t
-ptyFork(int *masterFd, char *slaveName, size_t snLen,
+
+
+pid_t ptyFork(int *masterFd, char *slaveName, size_t snLen,
         const struct termios *slaveTermios, const struct winsize *slaveWS)
 {
     int mfd, slaveFd, savedErrno;
     pid_t childPid;
     char slname[MAX_SNAME];
-
+    //< 打开主设备返回文件描述符
     mfd = ptyMasterOpen(slname, MAX_SNAME);
     if (mfd == -1)
         return -1;
 
     if (slaveName != NULL) {            /* Return slave name to caller */
         if (strlen(slname) < snLen) {
+            //< 取出主设备的文件描述符
             strncpy(slaveName, slname, snLen);
 
         } else {                        /* 'slaveName' was too small */
@@ -73,12 +75,13 @@ ptyFork(int *masterFd, char *slaveName, size_t snLen,
     }
 
     if (childPid != 0) {                /* Parent */
+        //< 返回主设备文件描述符就退出进程
         *masterFd = mfd;                /* Only parent gets master fd */
         return childPid;                /* Like parent of fork() */
     }
 
     /* Child falls through to here */
-
+    //< 开启一个子进程，使子进程称为会话的首进程
     if (setsid() == -1)                 /* Start a new session */
         err_exit("ptyFork:setsid");
 

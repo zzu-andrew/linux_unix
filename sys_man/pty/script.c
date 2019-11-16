@@ -69,7 +69,7 @@ main(int argc, char *argv[])
 
         /* If the SHELL variable is set, use its value to determine
            the shell execed in child. Otherwise use /bin/sh. */
-
+        //< 查看 shell是否存在，不存在就使员工/bin/sh
         shell = getenv("SHELL");
         if (shell == NULL || *shell == '\0')
             shell = "/bin/sh";

@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "limits.h": "c",
-        "tlpi_hdr.h": "c"
+        "tlpi_hdr.h": "c",
+        "id_echo.h": "c",
+        "fcntl.h": "c"
     }
 }

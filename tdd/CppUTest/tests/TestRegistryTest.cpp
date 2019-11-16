@@ -31,9 +31,7 @@
 
 namespace
 {
-void stub()
-{
-}
+
 const int testLineNumber = 1;
 }
 

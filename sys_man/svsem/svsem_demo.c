@@ -29,7 +29,7 @@ main(int argc, char *argv[])
     if (argc < 2 || argc > 3 || strcmp(argv[1], "--help") == 0)
         usageErr("%s init-value\n"
                  "   or: %s semid operation\n", argv[0], argv[0]);
-
+    //创建一个信号量
     if (argc == 2) {            /* Create and initialize semaphore */
         union semun arg;
 
@@ -43,7 +43,8 @@ main(int argc, char *argv[])
 
         printf("Semaphore ID = %d\n", semid);
 
-    } else {                    /* Perform an operation on first semaphore */
+    } else {  
+        //信号量减 或者信号量增加                  /* Perform an operation on first semaphore */
 
         struct sembuf sop;              /* Structure defining operation */
 

@@ -25,7 +25,7 @@ main(int argc, char *argv[])
     struct termios tp;
     int intrChar;
 
-    if (argc > 1 && strcmp(argv[1], "--help") == 0)
+    if (argc > 1 && (argv[1], "--help") == 0)
         usageErr("%s [intr-char]\n", argv[0]);
 
     /* Determine new INTR setting from command line */

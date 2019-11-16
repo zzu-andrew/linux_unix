@@ -1,0 +1,5 @@
+]0;andrew@andrew-Thurley: /work/linux_unix/sys_man/pty[01;32mandrew@andrew-Thurley[00m:[01;34m/work/linux_unix/sys_man/pty[00m$ ps -aux|grep ""s"c"r"i"p"t"
+andrew    9267  0.0  0.0  12808  1760 pts/21   S+   22:42   0:00 ./[01;31m[Kscript[m[K
+andrew    9286  0.0  0.0  15984   960 pts/22   S+   22:42   0:00 grep --color=auto [01;31m[Kscript[m[K
+]0;andrew@andrew-Thurley: /work/linux_unix/sys_man/pty[01;32mandrew@andrew-Thurley[00m:[01;34m/work/linux_unix/sys_man/pty[00m$ exit
+exit

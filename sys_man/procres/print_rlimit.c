@@ -24,7 +24,6 @@ printRlimit(const char *msg, int resource)
     struct rlimit rlim;
 
     if (getrlimit(resource, &rlim) == -1)
-        return -1;
 
     printf("%s soft=", msg);
     if (rlim.rlim_cur == RLIM_INFINITY)
@@ -45,6 +44,7 @@ printRlimit(const char *msg, int resource)
 #endif
     else
         printf("%lld\n", (long long) rlim.rlim_max);
+        return -1;
 
     return 0;
 }
